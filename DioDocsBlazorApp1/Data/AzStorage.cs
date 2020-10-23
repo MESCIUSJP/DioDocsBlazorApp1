@@ -1,5 +1,4 @@
-﻿using Microsoft.Azure.Storage;
-using Microsoft.Azure.Storage.Blob;
+﻿using Azure.Storage.Blobs;
 using System.IO;
 
 namespace DioDocsBlazorApp1.Data
@@ -15,30 +14,20 @@ namespace DioDocsBlazorApp1.Data
 
         public async void UploadExcelAsync(MemoryStream uploadstream)
         {
-            CloudStorageAccount storageAccount;
-            CloudStorageAccount.TryParse(storageConnectionString, out storageAccount);
+            BlobContainerClient container = new BlobContainerClient(storageConnectionString, "diodocs");
 
-            CloudBlobClient cloudBlobClient = storageAccount.CreateCloudBlobClient();
+            BlobClient blob = container.GetBlobClient("Result.xlsx");
 
-            CloudBlobContainer cloudBlobContainer = cloudBlobClient.GetContainerReference("diodocs");
-
-            CloudBlockBlob cloudBlockBlob = cloudBlobContainer.GetBlockBlobReference("Result.xlsx");
-
-            await cloudBlockBlob.UploadFromStreamAsync(uploadstream);
+            await blob.UploadAsync(uploadstream);
         }
 
         public async void UploadPdfAsync(MemoryStream uploadstream)
         {
-            CloudStorageAccount storageAccount;
-            CloudStorageAccount.TryParse(storageConnectionString, out storageAccount);
+            BlobContainerClient container = new BlobContainerClient(storageConnectionString, "diodocs");
 
-            CloudBlobClient cloudBlobClient = storageAccount.CreateCloudBlobClient();
+            BlobClient blob = container.GetBlobClient("Result.pdf");
 
-            CloudBlobContainer cloudBlobContainer = cloudBlobClient.GetContainerReference("diodocs");
-
-            CloudBlockBlob cloudBlockBlob = cloudBlobContainer.GetBlockBlobReference("Result.pdf");
-
-            await cloudBlockBlob.UploadFromStreamAsync(uploadstream);
+            await blob.UploadAsync(uploadstream);
         }
     }
 }
