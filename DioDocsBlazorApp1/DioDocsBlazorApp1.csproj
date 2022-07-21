@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Storage.Blobs" Version="12.6.0" />
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.13.0" />
     <PackageReference Include="GrapeCity.DioDocs.Excel.ja" Version="3.2.2" />
     <PackageReference Include="GrapeCity.DioDocs.Pdf.ja" Version="3.2.0.554" />
   </ItemGroup>
